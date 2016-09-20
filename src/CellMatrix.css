@@ -1,0 +1,7 @@
+.cell-matrix{
+    float:left;
+    width: 20px;
+    height:20px;
+    background-color: sandybrown;
+    border: 3px solid lightgreen;
+}
