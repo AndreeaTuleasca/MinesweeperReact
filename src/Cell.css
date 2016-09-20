@@ -1,7 +1,17 @@
-.cell-matrix{
+.cell{
     float:left;
     width: 20px;
     height:20px;
     background-color: sandybrown;
     border: 3px solid lightgreen;
 }
+
+.cell-discovered{
+    height: 100%;
+    background-color: lightgoldenrodyellow;
+}
+
+.cell-bomb{
+    background-color: red;
+}
+

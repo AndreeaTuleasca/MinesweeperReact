@@ -17,7 +17,11 @@ class BombMatrix extends React.Component{
         this._generateMatrix();
     }
     render(){
-        return (<div>{this.state.matrix.map(row => <div className="bomb-matrix">{row.map(cell => <Cell cell={cell} onClick={this._cellClicked.bind(this, cell)}/>)}</div>)}</div>);
+        return (<div>{this.state.matrix.map(row => 
+                    <div className="bomb-matrix">{row.map(cell => 
+                        <Cell cell={cell} onClick={this._cellClicked.bind(this, cell)}/>)}
+                    </div>)}
+                </div>);
     }
 
     _cellClicked(cell){
@@ -42,32 +46,40 @@ class BombMatrix extends React.Component{
             let neighbourCells = [];
             //top neighbour
             if(cell.row>0 && !this.matrix[cell.row-1][cell.column].discovered){
+                //if it's empty value, add it for neighbour search
                 if(this.matrix[cell.row-1][cell.column].value === this.state.EMPTY_VALUE){
                     neighbourCells.push(this.matrix[cell.row-1][cell.column]);
+                //if it's  value, mark it as discovered, so the user will se a border of numbers
                 } else if(this.matrix[cell.row-1][cell.column].value !== this.state.BOMB_VALUE){
                     this.matrix[cell.row-1][cell.column].discovered = true;
                 }
             }
             //bottom neighbour
             if(cell.row< this.matrix.length -1 && !this.matrix[cell.row+1][cell.column].discovered){
+                //if it's empty value, add it for neighbour search
                 if(this.matrix[cell.row+1][cell.column].value === this.state.EMPTY_VALUE){
                     neighbourCells.push(this.matrix[cell.row+1][cell.column]);
+                //if it's  value, mark it as discovered, so the user will se a border of numbers
                 } else if(this.matrix[cell.row+1][cell.column].value !== this.state.BOMB_VALUE){
                     this.matrix[cell.row+1][cell.column].discovered = true;
                 }
             }
             //left neighbour
             if(cell.column>0 && !this.matrix[cell.row][cell.column-1].discovered){
+                //if it's empty value, add it for neighbour search
                 if(this.matrix[cell.row][cell.column-1].value === this.state.EMPTY_VALUE){
-                neighbourCells.push(this.matrix[cell.row][cell.column-1]);
+                    neighbourCells.push(this.matrix[cell.row][cell.column-1]);
+                //if it's  value, mark it as discovered, so the user will se a border of numbers
                 } else if(this.matrix[cell.row][cell.column-1].value !== this.state.BOMB_VALUE){
                     this.matrix[cell.row][cell.column-1].discovered = true;
                 }
             }
             //right neighbour
             if(cell.column< this.matrix[0].length-1 && !this.matrix[cell.row][cell.column+1].discovered){
+                //if it's empty value, add it for neighbour search
                 if(this.matrix[cell.row][cell.column+1].value === this.state.EMPTY_VALUE){
                     neighbourCells.push(this.matrix[cell.row][cell.column+1]);
+                //if it's  value, mark it as discovered, so the user will se a border of numbers
                 } else if(this.matrix[cell.row][cell.column+1].value !== this.state.BOMB_VALUE){
                     this.matrix[cell.row][cell.column+1].discovered = true;
                 }
