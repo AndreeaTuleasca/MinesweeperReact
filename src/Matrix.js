@@ -1,6 +1,6 @@
 import React from 'react';
-import './BombMatrix.css';
-import CellMatrix from './CellMatrix';
+import './Matrix.css';
+import Cell from './Cell';
 
 class BombMatrix extends React.Component{
 
@@ -8,7 +8,8 @@ class BombMatrix extends React.Component{
         super();
         this.matrix = [];
         this.state = {
-            BOMB_VALUE: -1
+            BOMB_VALUE: -1, 
+            EMPTY_VALUE: 0
         } 
     }
 
@@ -16,7 +17,7 @@ class BombMatrix extends React.Component{
         this._generateMatrix();
     }
     render(){
-        return (<div>{this.state.matrix.map(row => <div className="bomb-matrix">{row.map(cell => <CellMatrix cell={cell} onClick={this._cellClicked.bind(this, cell)}/>)}</div>)}</div>);
+        return (<div>{this.state.matrix.map(row => <div className="bomb-matrix">{row.map(cell => <Cell cell={cell} onClick={this._cellClicked.bind(this, cell)}/>)}</div>)}</div>);
     }
 
     _cellClicked(cell){
@@ -25,25 +26,60 @@ class BombMatrix extends React.Component{
         if(cell.value === this.state.BOMB_VALUE){
             alert('3...2...1...BBOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOM');
         }
-        // if(!cell.value){
-        //    this._discoverEmptyArea([cell]);
-        // } 
+        if(!cell.value){
+           this._discoverEmptyArea([cell]);
+        } 
         matrix[cell.row][cell.column].discovered = true;
         this.setState({matrix});
     }
 
-    // _discoverEmptyArea(cells){
-    //     if(cells.length = 0){
-    //         return;
-    //     }
-    //     for(let cell of cells){
-            
-    //     }
-    // }
+    _discoverEmptyArea(cells){
+        if(cells.length === 0){
+            return;
+        }
+        for(let cell of cells){
+            this.matrix[cell.row][cell.column].discovered = true;
+            let neighbourCells = [];
+            //top neighbour
+            if(cell.row>0 && !this.matrix[cell.row-1][cell.column].discovered){
+                if(this.matrix[cell.row-1][cell.column].value === this.state.EMPTY_VALUE){
+                    neighbourCells.push(this.matrix[cell.row-1][cell.column]);
+                } else if(this.matrix[cell.row-1][cell.column].value !== this.state.BOMB_VALUE){
+                    this.matrix[cell.row-1][cell.column].discovered = true;
+                }
+            }
+            //bottom neighbour
+            if(cell.row< this.matrix.length -1 && !this.matrix[cell.row+1][cell.column].discovered){
+                if(this.matrix[cell.row+1][cell.column].value === this.state.EMPTY_VALUE){
+                    neighbourCells.push(this.matrix[cell.row+1][cell.column]);
+                } else if(this.matrix[cell.row+1][cell.column].value !== this.state.BOMB_VALUE){
+                    this.matrix[cell.row+1][cell.column].discovered = true;
+                }
+            }
+            //left neighbour
+            if(cell.column>0 && !this.matrix[cell.row][cell.column-1].discovered){
+                if(this.matrix[cell.row][cell.column-1].value === this.state.EMPTY_VALUE){
+                neighbourCells.push(this.matrix[cell.row][cell.column-1]);
+                } else if(this.matrix[cell.row][cell.column-1].value !== this.state.BOMB_VALUE){
+                    this.matrix[cell.row][cell.column-1].discovered = true;
+                }
+            }
+            //right neighbour
+            if(cell.column< this.matrix[0].length-1 && !this.matrix[cell.row][cell.column+1].discovered){
+                if(this.matrix[cell.row][cell.column+1].value === this.state.EMPTY_VALUE){
+                    neighbourCells.push(this.matrix[cell.row][cell.column+1]);
+                } else if(this.matrix[cell.row][cell.column+1].value !== this.state.BOMB_VALUE){
+                    this.matrix[cell.row][cell.column+1].discovered = true;
+                }
+            }
+
+            this._discoverEmptyArea(neighbourCells);
+        }
+    }
 
     _generateMatrix(){
-        this.matrix = this._generateEmptyMatrix(5, 5);
-        this._addBombsToMatrix(5);
+        this.matrix = this._generateEmptyMatrix(20, 30);
+        this._addBombsToMatrix(50);
         this._addValuesToMatrix();
         this.setState({matrix: this.matrix});
     }

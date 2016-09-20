@@ -1,5 +1,5 @@
 import React from 'react';
-import './CellMatrix.css'
+import './Cell.css'
 
 class CellMatrix extends React.Component{
     render(){
