@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import MenuBar from './MenuBar'
 import Matrix from './Matrix';
 import Bomb from './Bomb'
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="App">
@@ -14,11 +15,10 @@ class App extends Component {
           <h2>Minesweeper</h2>
         </div>
         <div className="App-body">
+          <MenuBar/>
           <Matrix/>
         </div>
       </div>
     );
   }
 }
-
-export default App;
