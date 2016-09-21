@@ -1,3 +1,6 @@
-.bomb-matrix{
+.matrix{
+    margin: 20px;
+}
+.row{
     clear: both;
 }

@@ -1,0 +1,45 @@
+.bomb-cell{
+    position: relative;
+    width:100%;
+    height:100%;
+}
+.bomb{
+    position: absolute;
+}
+.bomb-wire{
+    top:30%;
+    left:50%;
+    height: 20%;
+    width: 15%;
+    transform: skewY(120deg);
+    border: 1px solid black;
+    background-color: black;
+    z-index:1;
+}
+.bomb-flame{
+    border-radius: 50%;
+    background: radial-gradient(yellow, orange, red);
+    z-index:3;
+    transform: skewY(180deg);
+}
+.bomb-flame-vertical{
+    top:5%;
+    left:65%;
+    height: 50%;
+    width: 20%;
+}
+.bomb-flame-horizontal{
+    top:20%;
+    left: 50%;
+    height: 20%;
+    width: 50%;
+}
+.bomb-body{
+    bottom:5%;
+    left: 5%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(gray, black);
+    border-radius: 50%;
+    z-index:2;
+}

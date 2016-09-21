@@ -2,17 +2,13 @@
     float:left;
     width: 20px;
     height:20px;
-    background-color: sandybrown;
-    border: 3px solid lightgreen;
+    background-color: #B2A591;
+    border: 3px groove #B2A591;
 }
 
 .cell-discovered{
     height: 100%;
-    background-color: lightgoldenrodyellow;
-}
-
-.cell-bomb{
-    background-color: red;
+    background-color: #FFF8E8;
 }
 
 .cell-marked{

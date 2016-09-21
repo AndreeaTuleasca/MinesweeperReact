@@ -15,8 +15,8 @@ class BombMatrix extends React.Component{
         this._generateMatrix();
     }
     render(){
-        return (<div>{this.state.matrix.map(row => 
-                    <div className="bomb-matrix">{row.map(cell => 
+        return (<div className="matrix">{this.state.matrix.map(row => 
+                    <div className="row">{row.map(cell => 
                         <Cell cell={cell} onClick={this._cellClicked.bind(this, cell)}/>)}
                     </div>)}
                 </div>);
