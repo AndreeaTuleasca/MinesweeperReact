@@ -18,19 +18,22 @@
 }
 .bomb-flame{
     border-radius: 50%;
-    background: radial-gradient(yellow, orange, red);
+    background: radial-gradient(yellow, red);
     z-index:3;
     transform: skewY(180deg);
+    animation-name: explode;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
 }
 .bomb-flame-vertical{
-    top:5%;
-    left:65%;
+    top:0;
+    left:60%;
     height: 50%;
     width: 20%;
 }
 .bomb-flame-horizontal{
-    top:20%;
-    left: 50%;
+    top:15%;
+    left: 45%;
     height: 20%;
     width: 50%;
 }
@@ -42,4 +45,10 @@
     background: radial-gradient(gray, black);
     border-radius: 50%;
     z-index:2;
+}
+
+@keyframes explode{
+    from {background: radial-gradient(yellow, red);}
+    to {background: radial-gradient(yellow, orange, red);
+    transform: rotate(90deg);}
 }
