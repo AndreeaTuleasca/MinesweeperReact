@@ -8,7 +8,7 @@ export default class App extends Component {
   constructor(){
     super();
     this.state = {
-      bombs: 5,
+      bombs: 50,
       rows: 20,
       columns: 30  
     }
@@ -23,7 +23,7 @@ export default class App extends Component {
           <h2>Minesweeper</h2>
         </div>
         <div className="App-body">
-          <MenuBar getMatrixSeeds={this._getMatrixSeeds.bind(this)} bombs={this.state.bombs} rows={this.state.rows} columns={this.state.columns}/>
+          {/*<MenuBar getMatrixSeeds={this._getMatrixSeeds.bind(this)} bombs={this.state.bombs} rows={this.state.rows} columns={this.state.columns}/>*/} 
           <Matrix bombs={this.state.bombs} rows={this.state.rows} columns={this.state.columns}/>
         </div>
       </div>
@@ -34,6 +34,6 @@ export default class App extends Component {
       this.bombs = bombs;
       this.rows = rows;
       this.columns = columns;
-      this.setState(bombs, rows, columns);
+      this.setState({bombs, rows, columns});
   }
 }
