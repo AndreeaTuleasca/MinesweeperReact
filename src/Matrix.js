@@ -120,8 +120,8 @@ class BombMatrix extends React.Component{
     }
 
     _generateMatrix(){
-        this.matrix = this._generateEmptyMatrix(20, 30);
-        this._addBombsToMatrix(50);
+        this.matrix = this._generateEmptyMatrix(this.props.rows, this.props.columns);
+        this._addBombsToMatrix(this.props.bombs);
         this._addValuesToMatrix();
         this.setState({matrix: this.matrix});
     }

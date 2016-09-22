@@ -20,7 +20,6 @@
     border-radius: 50%;
     background: radial-gradient(yellow, red);
     z-index:3;
-    transform: skewY(180deg);
     animation-name: explode;
     animation-duration: 1s;
     animation-iteration-count: infinite;
