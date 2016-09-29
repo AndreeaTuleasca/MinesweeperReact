@@ -25,6 +25,6 @@ export default class MenuBar extends Component{
 
     _handleSubmit(event){
         event.preventDefault();
-        this.props.getMatrixSeeds(this._bombs.value, this._rows.value, this._columns.value);
+        this.props.generateMatrixWithUserInput(this._bombs.value, this._rows.value, this._columns.value);
     }
 }

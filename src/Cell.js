@@ -3,14 +3,13 @@ import './Cell.css'
 import CellDiscovered from './CellDiscovered';
 import CellHidden from './CellHidden';
 
-class CellMatrix extends React.Component{
+export default class Cell extends React.Component{
     render(){
-        return (<div className="cell" onClick={this.props.onClick.bind(this)} 
-        onContextMenu={this.props.onClick.bind(this)}>
-        {this.props.cell.discovered ? <CellDiscovered cell={this.props.cell}/> : 
-        <CellHidden cell={this.props.cell}/>}</div>);
+        return (<div className="cell" onClick={this.props.onClick.bind(this)}>
+                    {this.props.cell.discovered ? <CellDiscovered cell={this.props.cell}/> : 
+                    <CellHidden cell={this.props.cell}/>}
+                </div>);
     }
 
 
 }
-export default CellMatrix;
