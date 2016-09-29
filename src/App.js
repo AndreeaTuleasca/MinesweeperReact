@@ -3,7 +3,7 @@ import './App.css';
 import MenuBar from './MenuBar'
 import Matrix from './Matrix';
 import Bomb from './Bomb';
-import {generateMatrix, updateMatrixWithDiscoveredCell, updateMatrixWithMarkedCell} from './MatrixGenerator'
+import { isGameOver, generateMatrix, updateMatrixWithDiscoveredCell, updateMatrixWithMarkedCell} from './MatrixGenerator'
 
 export default class App extends Component {
   constructor(){
@@ -49,7 +49,9 @@ export default class App extends Component {
         const RIGHT_CLICK = 2;
         event.preventDefault();
         let matrix = this.state.matrix;
-        if(event.button === LELFT_CLICK){
+        if(isGameOver(this.state.bombs, matrix)){
+          return false;
+        } else if(event.button === LELFT_CLICK){
            matrix = updateMatrixWithDiscoveredCell(cell, matrix);
         } 
         else if(event.button === RIGHT_CLICK){

@@ -10,6 +10,4 @@ export default class Cell extends React.Component{
                     <CellHidden cell={this.props.cell}/>}
                 </div>);
     }
-
-
 }

@@ -31,6 +31,24 @@ export function updateMatrixWithMarkedCell(cell, currentMatrix){
     return matrix;
 }
 
+export function isGameOver(bombs, matrix){
+    let rows = matrix.length;
+    let columns = matrix[0].length;
+    let currentBombs = 0;
+    for(let i=0;i<rows;i++){
+        for(let j=0;j<columns;j++){
+            if(matrix[i][j].isBomb && matrix[i][j].discovered){ 
+                currentBombs++;
+            }
+        }
+    }
+    if(bombs === currentBombs){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function _generateEmptyMatrix(rows, columns){
     let localMatrix = [];
     for(let i=0;i<rows;i++){
@@ -51,7 +69,7 @@ function _addBombsToMatrix(noOfBombs){
     while(noOfBombs > 0){
         var rowIndex = Math.floor(Math.random() * rows);
         var columnIndex = Math.floor(Math.random() * columns);
-        if(!matrix[rowIndex][columnIndex].isValue){
+        if(!matrix[rowIndex][columnIndex].isBomb){
             matrix[rowIndex][columnIndex].value = BOMB_VALUE;
             matrix[rowIndex][columnIndex].isBomb = true;
             noOfBombs--;
