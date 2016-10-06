@@ -3,13 +3,13 @@ import './App.css';
 import MenuBar from './MenuBar'
 import Matrix from './Matrix';
 import Bomb from './Bomb';
-import {updateAvailableFlags, generateMatrix, updateMatrixWithDiscoveredCell, updateMatrixWithMarkedCell} from './MatrixGenerator';
+import {updateGameState, generateMatrix, updateMatrixWithDiscoveredCell, updateMatrixWithMarkedCell} from './MatrixGenerator';
 
 export default class App extends Component {
   constructor(){
     super();
     this.state = {
-      gameState: 'not-started', //not-started, in-progress, game-over
+      gameState: 'not-started', //not-started, in-progress, game-over, game-won
       availableFlags: 50, 
       bombs: 50,
       rows: 20,
@@ -52,12 +52,15 @@ export default class App extends Component {
         if(this.state.gameState === 'game-over'){
           return false;
         }
+        if(this.state.gameState === 'game-won'){
+          return;
+        }
         const LELFT_CLICK = 0;
         const RIGHT_CLICK = 2;
         let nextState;
        if(event.button === LELFT_CLICK){
            nextState = updateMatrixWithDiscoveredCell(cell, this.state);
-           nextState = updateAvailableFlags(this.state);
+           nextState = updateGameState(this.state);
         } 
         else if(event.button === RIGHT_CLICK){
           if(cell.discovered){

@@ -36,16 +36,23 @@ export function updateMatrixWithMarkedCell(cell, state){
     return state;
 }
 
-export function updateAvailableFlags(state){
-    let usedFlags = 0;
+export function updateGameState(state){
+    let usedFlags = 0, cellsDiscovered =0;
     for(let i=0;i<state.rows;i++){
         for(let j=0;j<state.columns;j++){
             if(state.matrix[i][j].marked && !state.matrix[i][j].discovered){
                 usedFlags++;
             }
+            if(state.matrix[i][j].discovered){
+                cellsDiscovered++;
+            }
         }
     }
     state.availableFlags = state.bombs - usedFlags;
+    let cellsHidden = state.rows*state.columns-cellsDiscovered
+    if(cellsHidden === parseInt(state.bombs, 10)){
+        state.gameState = 'game-won';
+    }
     return state;
 }
 

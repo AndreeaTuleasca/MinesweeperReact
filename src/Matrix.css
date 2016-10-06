@@ -2,7 +2,7 @@
     margin: 20px;
 }
 .matrix .matrix-header{
-    height: 70px;
+    height: 60px;
     border: 3px groove #B2A591;
     background-color: #FFF8E8;
     box-shadow: 0 0 10px 4px #B2A591 inset;
@@ -27,9 +27,7 @@
 }
 
 .matrix-header-icon{
-    background-color: orangered;
-    background-size: 100%;
-    background-repeat: no-repeat;
+    height:50px;
 }
 
 
