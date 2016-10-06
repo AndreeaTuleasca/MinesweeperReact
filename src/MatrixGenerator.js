@@ -13,40 +13,40 @@ export function resetGame(){
     generateMatrix();
 }
 
-export function updateMatrixWithDiscoveredCell(cell, currentMatrix){
-    matrix = currentMatrix; 
+export function updateMatrixWithDiscoveredCell(cell, state){
+    matrix = state.matrix;
+    if(cell.marked){
+        state.availableFlags--;
+    } 
     if(cell.isBomb){
         _discoverAllBombs();
+        state.gameState = 'game-over';
     }
     else if(!cell.isValue){
         _discoverEmptyArea([cell]);
     } 
     matrix[cell.row][cell.column].discovered = true;
-    return matrix;
+    state.matrix = matrix;
+    return state;
 }
 
-export function updateMatrixWithMarkedCell(cell, currentMatrix){
-    matrix = currentMatrix;
-    matrix[cell.row][cell.column].marked = true;
-    return matrix;
+export function updateMatrixWithMarkedCell(cell, state){
+    state.matrix[cell.row][cell.column].marked = true;
+    state.availableFlags--;
+    return state;
 }
 
-export function isGameOver(bombs, matrix){
-    let rows = matrix.length;
-    let columns = matrix[0].length;
-    let currentBombs = 0;
-    for(let i=0;i<rows;i++){
-        for(let j=0;j<columns;j++){
-            if(matrix[i][j].isBomb && matrix[i][j].discovered){ 
-                currentBombs++;
+export function updateAvailableFlags(state){
+    let usedFlags = 0;
+    for(let i=0;i<state.rows;i++){
+        for(let j=0;j<state.columns;j++){
+            if(state.matrix[i][j].marked && !state.matrix[i][j].discovered){
+                usedFlags++;
             }
         }
     }
-    if(bombs === currentBombs){
-        return true;
-    } else {
-        return false;
-    }
+    state.availableFlags = state.bombs - usedFlags;
+    return state;
 }
 
 function _generateEmptyMatrix(rows, columns){

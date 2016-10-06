@@ -1,0 +1,20 @@
+.flag-container{
+    width:18px;
+    height:18px;
+}
+
+.flag-top{
+    height: 40%;
+    width:80%;
+    margin-left: 10%;
+    border: 1px solid orangered;
+    border-radius: 0 50% 50% 0; 
+    background:linear-gradient(to right, orangered, orange, yellow);
+}
+
+.flag-pole{
+    height: 60%;
+    width: 20%;
+    margin-left:10%;
+    background: linear-gradient(to right, black, darkgray, black);
+}

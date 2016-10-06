@@ -3,16 +3,19 @@ import './App.css';
 import MenuBar from './MenuBar'
 import Matrix from './Matrix';
 import Bomb from './Bomb';
-import { isGameOver, generateMatrix, updateMatrixWithDiscoveredCell, updateMatrixWithMarkedCell} from './MatrixGenerator'
+import {updateAvailableFlags, generateMatrix, updateMatrixWithDiscoveredCell, updateMatrixWithMarkedCell} from './MatrixGenerator';
 
 export default class App extends Component {
   constructor(){
     super();
     this.state = {
+      gameState: 'not-started', //not-started, in-progress, game-over
+      availableFlags: 50, 
       bombs: 50,
       rows: 20,
-      columns: 30 , 
-      matrix: []
+      columns: 30, 
+      matrix: [],
+      onClick: this.cellClicked.bind(this)
     }
   }
 
@@ -32,7 +35,7 @@ export default class App extends Component {
         </div>
         <div className="App-body">
           <MenuBar generateMatrixWithUserInput={this.generateMatrixWithUserInput.bind(this)} bombs={this.state.bombs} rows={this.state.rows} columns={this.state.columns}/>
-          <Matrix matrix={this.state.matrix} onClick={this.cellClicked.bind(this)}/>
+          <Matrix {...this.state}/>
         </div>
       </div>
     );
@@ -40,23 +43,29 @@ export default class App extends Component {
   
   generateMatrixWithUserInput(bombs, rows, columns){
     let matrix = generateMatrix(bombs, rows, columns);
-    this.setState({bombs, rows, columns, matrix});
+    this.setState({bombs, rows, columns, matrix, availableFlags: bombs, gameState: 'in-progress'});
   }
 
 
   cellClicked(cell, event){
+        event.preventDefault();
+        if(this.state.gameState === 'game-over'){
+          return false;
+        }
         const LELFT_CLICK = 0;
         const RIGHT_CLICK = 2;
-        event.preventDefault();
-        let matrix = this.state.matrix;
-        if(isGameOver(this.state.bombs, matrix)){
-          return false;
-        } else if(event.button === LELFT_CLICK){
-           matrix = updateMatrixWithDiscoveredCell(cell, matrix);
+        let nextState;
+       if(event.button === LELFT_CLICK){
+           nextState = updateMatrixWithDiscoveredCell(cell, this.state);
+           nextState = updateAvailableFlags(this.state);
         } 
         else if(event.button === RIGHT_CLICK){
-           matrix = updateMatrixWithMarkedCell(cell, matrix);
+          if(cell.discovered){
+            return;
+          } else {
+           nextState = updateMatrixWithMarkedCell(cell, this.state);
+          }
         }
-        this.setState(matrix);
+        this.setState(nextState);
     }
 }

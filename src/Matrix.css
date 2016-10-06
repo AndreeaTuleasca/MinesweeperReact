@@ -1,6 +1,38 @@
 .matrix{
     margin: 20px;
 }
+.matrix .matrix-header{
+    height: 70px;
+    border: 3px groove #B2A591;
+    background-color: #FFF8E8;
+    box-shadow: 0 0 10px 4px #B2A591 inset;
+}
+
+.matrix .matrix-header .header-row{
+    margin: 10px auto;
+    clear: both;
+}
+
+.header-column{
+    float:left;
+    height: 50px;
+}
+
+.header-column-narrow{
+    width: 10%;
+}
+
+.header-column-wide{
+    width:35%;
+}
+
+.matrix-header-icon{
+    background-color: orangered;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+
 .row{
     clear: both;
 }
