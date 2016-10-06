@@ -30,6 +30,13 @@
     height:50px;
 }
 
+.matrix-header-text{
+    color:darkred;
+    font-weight: bold;
+}
+
+.matrix-header-value{
+}
 
 .row{
     clear: both;
