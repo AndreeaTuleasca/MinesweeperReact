@@ -13,7 +13,7 @@ export default class App extends Component {
       availableFlags: 50, 
       bombs: 50,
       rows: 20,
-      columns: 30, 
+      columns: 40, 
       matrix: [],
       onClick: this.cellClicked.bind(this)
     }
